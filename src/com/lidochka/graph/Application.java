@@ -24,22 +24,22 @@ public class Application {
 	private MainPanel mainPanel;
 	private ControlPanel controlPanel;
 
-	public void save()
+	public void save(JFrame frame)
 	{
-		JFileChooser fileChooser = new JFileChooser();
-		if ( fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION ) {
-			BufferedImage bImg = new BufferedImage(mainPanel.getWidth(), mainPanel.getHeight(), BufferedImage.TYPE_INT_RGB);
-			Graphics2D cg = bImg.createGraphics();
-			mainPanel.paintAll(cg);
-			try {
-				if (ImageIO.write(bImg, "png", new File(fileChooser.getSelectedFile()+".png"))) {
-					System.out.println("— saved");
-				}
-			} catch (IOException e) {
-// TODO Auto-generated catch block
-				e.printStackTrace();
+		FileDialog fileDialog = new FileDialog(frame,"Save",FileDialog.SAVE);
+		fileDialog.setVisible(true);
+		BufferedImage bImg = new BufferedImage(mainPanel.getWidth(), mainPanel.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D cg = bImg.createGraphics();
+		mainPanel.paintAll(cg);
+		try {
+			if (ImageIO.write(bImg, "png", new File(fileDialog.getFiles()[0]+".png"))) {
+				System.out.println("— saved");
 			}
+		} catch (IOException e) {
+// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 	}
 
 	protected void showUI () {
@@ -66,7 +66,7 @@ public class Application {
         item1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				save();
+				save(frame);
 			}
 		});
 		item2.addActionListener(new ActionListener() {
