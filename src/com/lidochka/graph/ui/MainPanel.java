@@ -1,32 +1,23 @@
 package com.lidochka.graph.ui;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.Stroke;
+import java.awt.*;
 import java.awt.geom.GeneralPath;
-import java.text.DecimalFormat;
+
 import java.util.ArrayList;
-import java.util.Formatter;
+
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.NumberFormatter;
+
 
 import com.lidochka.graph.events.FunctionDataEvent;
 import com.lidochka.graph.model.FunctionData;
 import com.lidochka.graph.model.FunctionPoint;
 import com.lidochka.graph.service.AppEventListener;
-import java.awt.Image;
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel implements AppEventListener {
-	
+
 	private int padding = 25;
 	private int labelPadding = 35;
 	private Color lineColor = new Color(44, 102, 230, 180);
@@ -39,8 +30,13 @@ public class MainPanel extends JPanel implements AppEventListener {
 	public MainPanel() {
 		setPreferredSize(new Dimension(800, 600));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
+
+
 	}
-	
+
+
+
+
 	@Override
 	public void onApplicationEvent(Object event) {
 		
@@ -51,11 +47,14 @@ public class MainPanel extends JPanel implements AppEventListener {
 		
 	}
 
+
 	public void setFunctionData(FunctionData functionData) {
 		this.functionData = functionData;
 		invalidate();
 		this.repaint();
 	}
+
+
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -65,6 +64,7 @@ public class MainPanel extends JPanel implements AppEventListener {
 		graphics2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		// draw white background
 		graphics2.setColor(Color.WHITE);
+
 		graphics2.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - labelPadding, getHeight() - 2 * padding - labelPadding);
 		graphics2.setColor(Color.BLACK);
 
