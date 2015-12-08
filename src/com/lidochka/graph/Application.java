@@ -26,17 +26,19 @@ public class Application {
 
 	public void save()
 	{
-		BufferedImage bImg = new BufferedImage(mainPanel.getWidth(), mainPanel.getHeight(), BufferedImage.TYPE_INT_RGB);
-		Graphics2D cg = bImg.createGraphics();
-		mainPanel.paintAll(cg);
-		try {
-			if (ImageIO.write(bImg, "png", new File("./output_image.png")))
-			{
-				System.out.println("-- saved");
+		JFileChooser fileChooser = new JFileChooser();
+		if ( fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION ) {
+			BufferedImage bImg = new BufferedImage(mainPanel.getWidth(), mainPanel.getHeight(), BufferedImage.TYPE_INT_RGB);
+			Graphics2D cg = bImg.createGraphics();
+			mainPanel.paintAll(cg);
+			try {
+				if (ImageIO.write(bImg, "png", new File(fileChooser.getSelectedFile()+".png"))) {
+					System.out.println("— saved");
+				}
+			} catch (IOException e) {
+// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
