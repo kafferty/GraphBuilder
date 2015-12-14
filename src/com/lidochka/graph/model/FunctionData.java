@@ -4,57 +4,48 @@ import java.util.List;
 
 public class FunctionData {
 
-	private List<FunctionPoint> points;
-	private String infixNotation;
-	private double minScore;
-	private double maxScore;
+	private List<FunctionPoint>[] points;
+	private String[] infixNotations;
+	private double minX;
+	private double maxX;
+	private double minY;
+	private double maxY;
 	
-	public FunctionData (String infixNotation, List<FunctionPoint> points) {
-		
-		this.infixNotation = infixNotation;
+	public FunctionData (String[] infixNotation, List<FunctionPoint>[] points, double minX, double maxX, double minY, double maxY) {
+		this.infixNotations = infixNotation;
 		this.points = points;
-		
-		minScore = Double.MAX_VALUE;
-		for (FunctionPoint point : points) {
-			minScore = Math.min(minScore, point.getY());
-		}
-		if (Double.isInfinite(minScore))
-			minScore=Double.MAX_VALUE*(-1);
-		
-		maxScore = Double.MIN_VALUE;
-		for (FunctionPoint point : points) {
-			maxScore = Math.max(maxScore, point.getY());
-		}
-		if (Double.isInfinite(maxScore))
-			maxScore=Double.MAX_VALUE;
+		this.minX = minX;
+		this.maxX = maxX;
+		this.minY = minY;
+		this.maxY = maxY;
 	}
 	
-	public String getInfixNotation() {
-		return infixNotation;
+	public String[] getInfixNotations() {
+		return infixNotations;
 	}
 
-	public List<FunctionPoint> getPoints() {
+	public List<FunctionPoint>[] getPoints() {
 		return points;
 	}
 
 	public int size() {
-		return points.size();
+		return points.length;
 	}
 	
 	public double getMinY() {
-		return minScore;
+		return minY;
 	}
 
 	public double getMaxY() {
-		return maxScore;
+		return maxY;
 	}
 	
 	public double getMinX() {
-		return points.get(0).getX();
+		return minX;
 	}
 
 	public double getMaxX() {
-		return points.get(size()-1).getX();
+		return maxX;
 	}
 		
 }
